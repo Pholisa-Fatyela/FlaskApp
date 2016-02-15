@@ -32,6 +32,20 @@
 
         navigator.geolocation.getCurrentPosition(success, error);
       }
+
+      function reqListener () {
+        console.log(this.responseText);
+      }
+
+      function getWeather(position)
+      {
+          var oReq = new XMLHttpRequest();
+          oReq.addEventListener("load", reqListener);
+          oReq.open("GET", "http://localhost/weather?long=" + position.coords.longitude + "&lat=" + position.coords.latitude);
+          oReq.send();
+      }
+
+      navigator.geolocation.getCurrentPosition(getWeather);
     </script>
   </head>
   <body>
